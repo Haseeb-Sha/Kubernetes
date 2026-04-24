@@ -4,7 +4,7 @@ metadata:
   name: my-app
   namespace: argocd
 spec:
-  project: default-project
+  project: default
   source:
     repoURL: https://github.com/Haseeb-Sha/Kubernetes.git
     targetRevision: HEAD
