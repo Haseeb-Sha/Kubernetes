@@ -30,6 +30,9 @@
   - minikube
       minikube addons enable ingress
       minikube dashboard
+      minikube tunnel 
+      minikube ssh
+      minikube start --driver=docker
   - helm
         helm repo add bitnami url
         helm search repo bitnami/chart_name
@@ -39,6 +42,10 @@
         helm rollback <chart_name>
         helm ls 
         helm uninstall mongodb
+
+    - roles cluster binding
+        kubectl get roles
+        kubectl auth can-i create deployments --namespace dev
         
 # used to access only single repo in the ecr but one line comment
   - create docker login (for ecr) 
@@ -58,5 +65,24 @@
 -> pvc claim should bne in the same namespace as of deployment
 
 -> we can also mount local volumes to our pod and container to use that files for the image using configMap and Secrets
+
+# SETUP ARGOCD
+ -  create a repo structure like 
+    your_main_repo/
+ ├── bootstrap/
+ │    └── root-app.yaml (that controls all and calls the projects)
+ ├── apps/
+ │    └── my-app.yaml ( that points to the mainfest and the manifests you have)
+      └── projects.yaml ( containes rules that are applied on you app)
+ └── manifests/
+      └── (your all YAML files here that you want to deploy)
+
+-   install argocd in your cluster 
+    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    kubectl get pods -n argocd
+
+-   kubectl port-forward svc/argocd-server -n argocd 8080:443 (for minikube for eks cluster use loabalancer or ingress)
+-   kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+-   kubectl apply -f bootstrap/root-app.yaml ( make sure if you using default project put default in all my-app.yaml in project)
      
 
