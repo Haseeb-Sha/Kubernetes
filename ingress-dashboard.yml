@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress 
+metadata:
+  name: ingress-controller
+  namespace: kubernetes-dashboard   #same as service and pod 
+spec:
+#  tls:
+#    - hosts: 
+#        - myapp.com
+#      secretName: my-app-secret-tls                                  #defaultBackend for tls config
+  rules:
+  - host: minikube-dashboard.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix 
+          backend:
+            service:
+              name: kubernetes-dashboard                            #single domain multiple paths ( can be configured as mutiple domains single path)
+              port:
+                number: 80
+        #- path: /metrics
+        #  pathType: Prefix
+        #  backend:
+        #    service: 
+        #      name: dashboard-metrics-scraper
+        #      port:
+        #        number: 8000
+  - host: metrics.minikube-dashboard.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix 
+          backend:
+            service:
+              name: dashboard-metrics-scraper                            #single domain multiple paths ( can be configured as mutiple domains single path)
+              port:
+                number: 8000
+
+    
