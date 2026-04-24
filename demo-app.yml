@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+type: 
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      imagePullSecrets:                # used to pull secret
+        - name: docker-ecr
+      containers:
+      - name: myapp
+        image: <Image>
+        imagePullPolicy: Always    # used to pull from rep instead of local
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 2000

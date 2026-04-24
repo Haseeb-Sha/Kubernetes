@@ -1,0 +1,7 @@
+apiVersion: v1 
+kind: ConfigMap
+metadata:
+  name: mongo-express-map
+  # namespace: kuberntes
+data:
+  mongourl: mongo-service
