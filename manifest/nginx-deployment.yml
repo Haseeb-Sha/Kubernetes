@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx
 spec: 
-  replicas: 2
+  replicas: 5
   selector:                                         # which Pods belong to a Deployment (this).
     matchLabels: 
       app: nginx

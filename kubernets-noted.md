@@ -84,5 +84,19 @@
 -   kubectl port-forward svc/argocd-server -n argocd 8080:443 (for minikube for eks cluster use loabalancer or ingress)
 -   kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
 -   kubectl apply -f bootstrap/root-app.yaml ( make sure if you using default project put default in all my-app.yaml in project)
-     
 
+
+gitops-config/
+│
+├── bootstrap/
+│   └── root-app.yaml
+│
+├── projects/
+│   ├── upi-project.yaml
+│   ├── nach-project.yaml
+│   └── rupay-project.yaml
+│
+├── applications/
+│   ├── upi-app.yaml
+│   ├── nach-app.yaml
+│   └── rupay-app.yaml
