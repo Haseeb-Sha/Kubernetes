@@ -46,6 +46,13 @@
     - roles cluster binding
         kubectl get roles
         kubectl auth can-i create deployments --namespace dev
+
+    - volume mount ( if  you want to use node volume for pods)
+        this stays on if the pods is active if it dies all data will be lost, however if the container isnside pod dies the data will remain there
+        
+        volumes:
+            - name: volume_name
+              emptyDir: {}
         
 # used to access only single repo in the ecr but one line comment
   - create docker login (for ecr) 

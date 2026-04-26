@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-insight
+  labels:
+    app: redis-insight
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis-insight
+  
+  template:
+    metadata:
+      labels:
+        app: redis-insight
+    spec:  
+      containers:
+       - name: redis-insight
+         image: redis/redisinsight:latest
+         ports:
+          - containerPort: 5540
+         env:
+          - name: RI_REDIS_HOST
+            value: redis-svc
+          - name: RI_REDIS_PORT
+            value: "6379"
+         volumeMounts:
+          - name: redis-insight-volume
+            mountPath: /data
+
+      volumes:
+        - name: redis-insight-volume
+          emptyDir: { }
+
+---
+
+apiVersion: v1
+kind: Service 
+metadata: 
+  name: redis-insight-svc
+
+spec:
+  selector:
+    app: redis-insight
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5540
+    targetPort: 5540
