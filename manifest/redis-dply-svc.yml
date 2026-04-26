@@ -26,7 +26,7 @@ spec:
             mountPath: /data
 
       volumes:
-        - name: redis-volume
+        - name: redis-volume                       # using node volume no pv and pvc
           emptyDir: {}
 
 ---
