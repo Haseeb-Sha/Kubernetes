@@ -1,0 +1,10 @@
+releases:
+  - name: nginx
+    chart: ../nginx
+    values:
+      - values-nginx.yaml
+
+  - name: redis
+    chart: ../redis
+    values:
+      - values-redis.yaml

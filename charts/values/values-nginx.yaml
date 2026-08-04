@@ -1,0 +1,6 @@
+DeployName: nginxdeployment
+AppName: nginx
+ImgName: nginx
+ImgVersion: latest
+SvcType: LoadBalancer
+SvcName: nginx-service

@@ -1,0 +1,11 @@
+DeployName: redisdeployment
+AppName: redisinsight
+ImgName: redis/redisinsight
+ImgVersion: latest
+SvcType: LoadBalancer
+SvcName: rediservice
+containerVars:
+  - name: RI_REDIS_HOST
+    value: redis-svc 
+  - name: RI_REDIS_PORT
+    value: 6379
